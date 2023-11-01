@@ -5,7 +5,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:todo/cubit/project_state.dart';
 
 class ProjectCubit extends Cubit<ProjectState> {
-  ProjectCubit() : super(InitialProjectState());
+  ProjectCubit() : super(InitialProjectState(message: ''));
 
   static ProjectCubit get(context) => BlocProvider.of(context);
 
@@ -40,7 +40,7 @@ class ProjectCubit extends Cubit<ProjectState> {
         log('database opened');
       },
     ).then((value) => database = value);
-    emit(CreateDatabase());
+    emit(CreateDatabase(message: ''));
   }
 
   void insertToDatabase({
@@ -56,7 +56,7 @@ class ProjectCubit extends Cubit<ProjectState> {
       ('$title', '$description', '$date', '$time');
       """).then((value) {
         log('$value');
-        emit(InsertToDatabase());
+        emit(InsertToDatabase(message: 'Insert Has Been Done Successfully'));
       }).onError((error, stackTrace) {
         log('$error');
       });
@@ -69,7 +69,7 @@ class ProjectCubit extends Cubit<ProjectState> {
     """).then((value) {
       log('Data has been fetched');
       log('$value');
-      emit(ReadFromDatabase());
+      emit(ReadFromDatabase(message: '$value'));
     }).onError((error, stackTrace) {
       log('Error has been ocurred  $error');
     });
@@ -98,7 +98,7 @@ class ProjectCubit extends Cubit<ProjectState> {
       log('successfully updated');
       log('$value');
       readFromDatabase();
-      emit(UpdateIntoDatabase());
+      emit(UpdateIntoDatabase(message: 'You Update Has Been Done'));
     }).onError((error, stackTrace) {
       log('error occurred while updating $error');
     });
@@ -110,7 +110,7 @@ class ProjectCubit extends Cubit<ProjectState> {
     database!.rawDelete('DELETE FROM tasks WHERE id = ?', [id]).then((value) {
       log('row deleted successfully');
       readFromDatabase();
-      emit(DeleteFromDatabase());
+      emit(DeleteFromDatabase(message: 'Row Deleted Successfully'));
     }).onError((error, stackTrace) {
       log('error occurred while deleting data $error');
     });
