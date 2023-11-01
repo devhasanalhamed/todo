@@ -13,29 +13,13 @@ class ProjectScreen extends StatelessWidget {
         builder: (context, state) {
           var cubit = ProjectCubit.get(context);
           return Scaffold(
-            appBar: AppBar(
-              title: Text(cubit.appBarTitles[cubit.currentIndex]),
-            ),
-            body: cubit.screens[cubit.currentIndex],
-            bottomNavigationBar: BottomNavigationBar(
-              onTap: (value) => cubit.bottomNavigationOnTap(value),
-              currentIndex: cubit.currentIndex,
-              items: const [
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.home),
-                  label: 'Home',
+              appBar: AppBar(),
+              body: Center(
+                child: TextButton(
+                  onPressed: () => cubit.createDatabase(),
+                  child: const Text('Create Database'),
                 ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.location_city),
-                  label: 'Cities',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.settings),
-                  label: 'Settings',
-                ),
-              ],
-            ),
-          );
+              ));
         });
   }
 }
