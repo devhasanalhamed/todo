@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sqflite/sqflite.dart';
@@ -11,26 +13,28 @@ class ProjectCubit extends Cubit<ProjectState> {
 
   static ProjectCubit get(context) => BlocProvider.of(context);
 
-  int currentIndex = 0;
 
-  final List<String> appBarTitles = [
-    'Home',
-    'Cities',
-    'Settings',
-  ];
-
-  final List<Widget> screens = [
-    const HomepageScreen(),
-    const CitiesScreen(),
-    const SettingsScreen(),
-  ];
-
-  void bottomNavigationOnTap(int? index) {
-    currentIndex = index!;
-    emit(BottomNavigationState());
-  }
+  Database? database;
 
   void createDatabase() {
-    openDatabase('');
+    openDatabase(
+      'todo.db',
+      version: 1,
+      onCreate: (db, version) {
+        db.execute("""
+        CREATE TABLE tasks(
+          id INTEGER PRIMARY KEY,
+          title TEXT, 
+          date TEXT,
+          time TEXT
+        )
+        """);
+        log('table created');
+      },
+      onOpen: (db) {
+        log('database opened');
+      },
+    ).then((value) => database = value);
+    emit(CreateDatabase());
   }
 }
