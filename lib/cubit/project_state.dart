@@ -1,13 +1,29 @@
-abstract class ProjectState {}
+abstract class ProjectState {
+  final String message;
 
-class InitialProjectState extends ProjectState {}
+  ProjectState({required this.message});
+}
 
-class CreateDatabase extends ProjectState {}
+class InitialProjectState extends ProjectState {
+  InitialProjectState({required super.message});
+}
 
-class InsertToDatabase extends ProjectState {}
+class CreateDatabase extends ProjectState {
+  CreateDatabase({required super.message});
+}
 
-class ReadFromDatabase extends ProjectState {}
+class InsertToDatabase extends ProjectState {
+  InsertToDatabase({required super.message});
+}
 
-class UpdateIntoDatabase extends ProjectState {}
+class ReadFromDatabase extends ProjectState {
+  ReadFromDatabase({required super.message});
+}
 
-class DeleteFromDatabase extends ProjectState {}
+class UpdateIntoDatabase extends ProjectState {
+  UpdateIntoDatabase({required super.message});
+}
+
+class DeleteFromDatabase extends ProjectState {
+  DeleteFromDatabase({required super.message});
+}
