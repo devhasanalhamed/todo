@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo/core/global/theme/theme_data/theme_data_light.dart';
 import 'package:todo/cubit/project_cubit.dart';
 import 'package:todo/project_screen.dart';
 
@@ -16,21 +17,12 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => ProjectCubit(),
+          create: (context) => ProjectCubit()..createDatabase(),
         ),
       ],
       child: MaterialApp(
         title: 'ToDo',
-        theme: ThemeData(
-          primarySwatch: Colors.deepPurple,
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-          appBarTheme: const AppBarTheme(
-            backgroundColor: Colors.deepPurple,
-            foregroundColor: Colors.white,
-            centerTitle: true,
-          ),
-        ),
+        theme: getThemeDataLight,
         home: const ProjectScreen(),
       ),
     );
