@@ -1,20 +1,24 @@
 import 'dart:developer';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:todo/cubit/project_state.dart';
-import 'package:todo/presentation/screens/cities_screen.dart';
-import 'package:todo/presentation/screens/homepage_screen.dart';
-import 'package:todo/presentation/screens/settings_screen.dart';
 
 class ProjectCubit extends Cubit<ProjectState> {
   ProjectCubit() : super(InitialProjectState());
 
   static ProjectCubit get(context) => BlocProvider.of(context);
 
-
   Database? database;
+
+  void deleteDB() {
+    deleteDatabase('todo.db').then((value) {
+      log('database deleted');
+      createDatabase();
+    }).onError((error, stackTrace) {
+      log('an error occurred deleting database $error');
+    });
+  }
 
   void createDatabase() {
     openDatabase(
@@ -25,9 +29,10 @@ class ProjectCubit extends Cubit<ProjectState> {
         CREATE TABLE tasks(
           id INTEGER PRIMARY KEY,
           title TEXT, 
+          description TEXT,
           date TEXT,
           time TEXT
-        )
+        );
         """);
         log('table created');
       },
@@ -36,5 +41,78 @@ class ProjectCubit extends Cubit<ProjectState> {
       },
     ).then((value) => database = value);
     emit(CreateDatabase());
+  }
+
+  void insertToDatabase({
+    required String title,
+    required String description,
+    required String date,
+    required String time,
+  }) {
+    database!.transaction((txn) async {
+      txn.rawInsert("""
+      INSERT INTO tasks
+      (title, description, date, time) VALUES
+      ('$title', '$description', '$date', '$time');
+      """).then((value) {
+        log('$value');
+        emit(InsertToDatabase());
+      }).onError((error, stackTrace) {
+        log('$error');
+      });
+    });
+  }
+
+  void readFromDatabase() {
+    database!.rawQuery("""
+      SELECT * FROM tasks
+    """).then((value) {
+      log('Data has been fetched');
+      log('$value');
+      emit(ReadFromDatabase());
+    }).onError((error, stackTrace) {
+      log('Error has been ocurred  $error');
+    });
+  }
+
+  void updateIntoDatabase({
+    required int id,
+    required String title,
+    required String description,
+    required String date,
+    required String time,
+  }) {
+    database!
+        .update(
+      'tasks',
+      {
+        'title': title,
+        'description': description,
+        'date': date,
+        'time': time,
+      },
+      where: 'id = ?',
+      whereArgs: [id],
+    )
+        .then((value) {
+      log('successfully updated');
+      log('$value');
+      readFromDatabase();
+      emit(UpdateIntoDatabase());
+    }).onError((error, stackTrace) {
+      log('error occurred while updating $error');
+    });
+  }
+
+  void deleteFromDatabase({
+    required int id,
+  }) {
+    database!.rawDelete('DELETE FROM tasks WHERE id = ?', [id]).then((value) {
+      log('row deleted successfully');
+      readFromDatabase();
+      emit(DeleteFromDatabase());
+    }).onError((error, stackTrace) {
+      log('error occurred while deleting data $error');
+    });
   }
 }
