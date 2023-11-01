@@ -18,6 +18,7 @@ class SearchCard extends StatelessWidget {
         margin: EdgeInsets.zero,
         child: TextFormField(
           decoration: const InputDecoration(
+            isDense: true,
             iconColor: Color(0xFFFEFEFE),
             prefixIconColor: Color(0xFFFEFEFE),
             hoverColor: Color(0xFFFEFEFE),
