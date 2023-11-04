@@ -1,17 +1,39 @@
 import 'package:flutter/material.dart';
 
-Widget textFormFieldComponent({
-  required TextEditingController controller,
-  required TextInputType inputType,
-  required ValueChanged<String>? submit,
-  required FormFieldValidator<String>? validator,
-  required String label,
-  required IconData prefixIcon,
-  required String hintText,
-}) =>
-    TextFormField(
+class TextFormFieldComponent extends StatelessWidget {
+  final TextEditingController controller;
+  final TextInputType? inputType;
+  final ValueChanged<String>? submit;
+  final FormFieldValidator<String>? validator;
+  final String label;
+  final IconData prefixIcon;
+  final String hintText;
+  final GestureTapCallback? onTap;
+  final bool readOnly;
+  final int? maxLines;
+
+  const TextFormFieldComponent({
+    super.key,
+    required this.controller,
+    this.inputType,
+    this.submit,
+    this.validator,
+    required this.label,
+    required this.prefixIcon,
+    required this.hintText,
+    this.onTap,
+    this.readOnly = false,
+    this.maxLines,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      readOnly: readOnly,
+      maxLines: maxLines,
       controller: controller,
       keyboardType: inputType,
+      onTap: onTap,
       validator: validator,
       onFieldSubmitted: submit,
       decoration: InputDecoration(
@@ -39,3 +61,5 @@ Widget textFormFieldComponent({
         ),
       ),
     );
+  }
+}
