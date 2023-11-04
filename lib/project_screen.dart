@@ -19,7 +19,7 @@ class ProjectScreen extends StatelessWidget {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(state.message),
-            duration: const Duration(milliseconds: 3000),
+            duration: const Duration(days: 1),
           ),
         );
       },
