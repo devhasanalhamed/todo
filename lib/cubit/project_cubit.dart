@@ -36,8 +36,9 @@ class ProjectCubit extends Cubit<ProjectState> {
         """);
         log('table created');
       },
-      onOpen: (db) {
+      onOpen: (database) {
         log('database opened');
+        readFromDatabase(database);
       },
     ).then((value) => database = value);
     emit(CreateDatabase(message: ''));
@@ -63,12 +64,15 @@ class ProjectCubit extends Cubit<ProjectState> {
     });
   }
 
-  void readFromDatabase() {
-    database!.rawQuery("""
+  List<Map<String, Object?>> tasks = [];
+
+  void readFromDatabase(database) async {
+    database.rawQuery("""
       SELECT * FROM tasks
     """).then((value) {
       log('Data has been fetched');
       log('$value');
+      tasks = value.toList();
       emit(ReadFromDatabase(message: '$value'));
     }).onError((error, stackTrace) {
       log('Error has been ocurred  $error');
@@ -97,7 +101,7 @@ class ProjectCubit extends Cubit<ProjectState> {
         .then((value) {
       log('successfully updated');
       log('$value');
-      readFromDatabase();
+      readFromDatabase(database);
       emit(UpdateIntoDatabase(message: 'You Update Has Been Done'));
     }).onError((error, stackTrace) {
       log('error occurred while updating $error');
@@ -109,7 +113,7 @@ class ProjectCubit extends Cubit<ProjectState> {
   }) {
     database!.rawDelete('DELETE FROM tasks WHERE id = ?', [id]).then((value) {
       log('row deleted successfully');
-      readFromDatabase();
+      readFromDatabase(database);
       emit(DeleteFromDatabase(message: 'Row Deleted Successfully'));
     }).onError((error, stackTrace) {
       log('error occurred while deleting data $error');
