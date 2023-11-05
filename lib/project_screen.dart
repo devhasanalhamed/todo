@@ -43,27 +43,28 @@ class ProjectScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              'title',
-                              style: TextStyle(
+                            Text(
+                              cubit.tasks[index]['title'],
+                              style: const TextStyle(
                                 fontSize: 22.0,
                               ),
                             ),
-                            const Text(
-                              'time',
-                              style: TextStyle(
+                            Text(
+                              cubit.tasks[index]['time'],
+                              style: const TextStyle(
                                 fontSize: 16.0,
                               ),
                             ),
                             IconButton(
-                              onPressed: () {},
+                              onPressed: () => cubit.deleteFromDatabase(
+                                  id: cubit.tasks[index]['id']),
                               icon: const Icon(Icons.delete),
                             ),
                           ],
                         ),
-                        const Text(
-                          'desc',
-                          style: TextStyle(
+                        Text(
+                          cubit.tasks[index]['description'],
+                          style: const TextStyle(
                             fontSize: 26.0,
                           ),
                         ),
