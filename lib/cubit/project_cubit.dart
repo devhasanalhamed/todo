@@ -57,6 +57,7 @@ class ProjectCubit extends Cubit<ProjectState> {
       ('$title', '$description', '$date', '$time');
       """).then((value) {
         log('$value');
+        readFromDatabase(database);
         emit(InsertToDatabase(message: 'Insert Has Been Done Successfully'));
       }).onError((error, stackTrace) {
         log('$error');
@@ -64,9 +65,10 @@ class ProjectCubit extends Cubit<ProjectState> {
     });
   }
 
-  List<Map<String, Object?>> tasks = [];
+  List tasks = [];
 
   void readFromDatabase(database) async {
+    tasks = [];
     database.rawQuery("""
       SELECT * FROM tasks
     """).then((value) {
@@ -74,8 +76,6 @@ class ProjectCubit extends Cubit<ProjectState> {
       log('$value');
       tasks = value.toList();
       emit(ReadFromDatabase(message: '$value'));
-    }).onError((error, stackTrace) {
-      log('Error has been ocurred  $error');
     });
   }
 
