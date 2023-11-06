@@ -16,8 +16,20 @@ class InsertToDatabase extends ProjectState {
   InsertToDatabase({required super.message});
 }
 
+class SuccessInsertToDatabase extends ProjectState {
+  SuccessInsertToDatabase({required super.message});
+}
+
 class ReadFromDatabase extends ProjectState {
   ReadFromDatabase({required super.message});
+}
+
+class LoadingReadingDataFromDatabase extends ProjectState {
+  LoadingReadingDataFromDatabase({required super.message});
+}
+
+class SuccessReadDataFromDatabase extends ProjectState {
+  SuccessReadDataFromDatabase({required super.message});
 }
 
 class UpdateIntoDatabase extends ProjectState {
