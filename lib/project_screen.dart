@@ -35,10 +35,10 @@ class ProjectScreen extends StatelessWidget {
         builder: (context, state) {
           var cubit = ProjectCubit.get(context);
           return ConditionalBuilder(
-            condition: state is! SuccessReadDataFromDatabase,
-            fallback: (context) =>
+            condition: state is LoadingReadingDataFromDatabase,
+            builder: (context) =>
                 const Center(child: CircularProgressIndicator()),
-            builder: (context) => cubit.tasks.isEmpty
+            fallback: (context) => cubit.tasks.isEmpty
                 ? const Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
