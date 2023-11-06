@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo/cubit/project_cubit.dart';
 import 'package:todo/cubit/project_state.dart';
 import 'package:todo/presentation/screens/add_tasks_screen.dart';
+import 'package:todo/presentation/widgets/drawer_component.dart';
 import 'package:todo/presentation/widgets/search_card.dart';
 
 class ProjectScreen extends StatelessWidget {
@@ -13,28 +14,29 @@ class ProjectScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Todo'),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => AddTasksScreen(),
-            ),
-          );
-        },
-        child: const Icon(Icons.add),
-      ),
-      body: BlocConsumer<ProjectCubit, ProjectState>(
-        listener: (context, state) {
-          log('cubit listener: something has been changed!');
-        },
-        builder: (context, state) {
-          var cubit = ProjectCubit.get(context);
-          return ConditionalBuilder(
+    return BlocConsumer<ProjectCubit, ProjectState>(
+      listener: (context, state) {
+        log('cubit listener: something has been changed!');
+      },
+      builder: (context, state) {
+        var cubit = ProjectCubit.get(context);
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text('Todo'),
+          ),
+          drawer: const DrawerComponent(),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AddTasksScreen(),
+                ),
+              );
+            },
+            child: const Icon(Icons.add),
+          ),
+          body: ConditionalBuilder(
             condition: state is LoadingReadingDataFromDatabase,
             builder: (context) =>
                 const Center(child: CircularProgressIndicator()),
@@ -95,9 +97,9 @@ class ProjectScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }
