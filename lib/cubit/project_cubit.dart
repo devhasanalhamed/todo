@@ -58,7 +58,8 @@ class ProjectCubit extends Cubit<ProjectState> {
       """).then((value) {
         log('$value');
         readFromDatabase(database);
-        emit(InsertToDatabase(message: 'Insert Has Been Done Successfully'));
+        emit(SuccessInsertToDatabase(
+            message: 'Insert Has Been Done Successfully'));
       }).onError((error, stackTrace) {
         log('$error');
       });
@@ -68,6 +69,9 @@ class ProjectCubit extends Cubit<ProjectState> {
   List tasks = [];
 
   void readFromDatabase(database) async {
+    emit(
+      LoadingReadingDataFromDatabase(message: 'Fetching data in a second'),
+    );
     tasks = [];
     database.rawQuery("""
       SELECT * FROM tasks
@@ -75,7 +79,7 @@ class ProjectCubit extends Cubit<ProjectState> {
       log('Data has been fetched');
       log('$value');
       tasks = value.toList();
-      emit(ReadFromDatabase(message: '$value'));
+      emit(SuccessReadDataFromDatabase(message: '$value'));
     });
   }
 
