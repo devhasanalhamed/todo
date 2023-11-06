@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:todo/cubit/project_state.dart';
@@ -122,5 +124,19 @@ class ProjectCubit extends Cubit<ProjectState> {
     }).onError((error, stackTrace) {
       log('error occurred while deleting data $error');
     });
+  }
+
+  void changeLanguageToArabic(BuildContext context) {
+    if (context.locale == const Locale('en', 'US')) {
+      context.setLocale(const Locale('ar', 'SA'));
+      emit(ChangeLanguageToArabic(message: 'language has been changed'));
+    }
+  }
+
+  void changeLanguageToEnglish(BuildContext context) {
+    if (context.locale == const Locale('ar', 'SA')) {
+      context.setLocale(const Locale('en', 'US'));
+      emit(ChangeLanguageToEnglish(message: 'language has been changed'));
+    }
   }
 }
