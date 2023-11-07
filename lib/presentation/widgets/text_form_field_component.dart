@@ -11,6 +11,7 @@ class TextFormFieldComponent extends StatelessWidget {
   final GestureTapCallback? onTap;
   final bool readOnly;
   final int? maxLines;
+  final String? initialValue;
 
   const TextFormFieldComponent({
     super.key,
@@ -24,6 +25,7 @@ class TextFormFieldComponent extends StatelessWidget {
     this.onTap,
     this.readOnly = false,
     this.maxLines,
+    this.initialValue,
   });
 
   @override
@@ -33,6 +35,7 @@ class TextFormFieldComponent extends StatelessWidget {
       maxLines: maxLines,
       controller: controller,
       keyboardType: inputType,
+      initialValue: initialValue,
       onTap: onTap,
       validator: validator,
       onFieldSubmitted: submit,
