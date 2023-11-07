@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:todo/cubit/project_state.dart';
 
@@ -138,5 +139,17 @@ class ProjectCubit extends Cubit<ProjectState> {
       context.setLocale(const Locale('en', 'US'));
       emit(ChangeLanguageToEnglish(message: 'language has been changed'));
     }
+  }
+
+  bool isDarkMode = false;
+  void changeThemeMode(bool? prefBool) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    if (prefBool != null) {
+      isDarkMode = prefBool;
+    } else {
+      isDarkMode = !isDarkMode;
+    }
+    await pref.setBool("prefBool", isDarkMode);
+    emit(ChangeThemeMode(message: 'theme mode has been changed'));
   }
 }
