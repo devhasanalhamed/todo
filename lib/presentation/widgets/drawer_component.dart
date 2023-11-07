@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo/cubit/project_cubit.dart';
@@ -21,11 +22,11 @@ class DrawerComponent extends StatelessWidget {
                 children: [
                   TextButton(
                       onPressed: () => cubit.changeLanguageToArabic(context),
-                      child: const Text('AR 🇸🇦')),
+                      child: Text('ar'.tr())),
                   const SizedBox(),
                   TextButton(
                       onPressed: () => cubit.changeLanguageToEnglish(context),
-                      child: const Text('EN 🇺🇸')),
+                      child: Text('en'.tr())),
                 ],
               ),
             ],
