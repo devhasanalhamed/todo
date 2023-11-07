@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        title: 'ToDo',
+        title: 'appTitle'.tr(),
         theme: getThemeDataLight,
         localizationsDelegates: context.localizationDelegates,
         supportedLocales: context.supportedLocales,
