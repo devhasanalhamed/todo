@@ -47,3 +47,7 @@ class ChangeLanguageToArabic extends ProjectState {
 class ChangeLanguageToEnglish extends ProjectState {
   ChangeLanguageToEnglish({required super.message});
 }
+
+class ChangeThemeMode extends ProjectState {
+  ChangeThemeMode({required super.message});
+}
