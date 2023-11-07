@@ -9,7 +9,7 @@ ThemeData get getThemeDataLight => ThemeData(
         primary: AppColorsLight.primaryColor,
       ),
       //SCAFFOLD THEME
-      scaffoldBackgroundColor: AppColorsLight.scaffoldBackgroundColor,
+      scaffoldBackgroundColor: const Color.fromARGB(255, 236, 182, 32),
       //APP BAR THEME
       appBarTheme: const AppBarTheme(
         foregroundColor: AppColorsLight.appBarForegroundColor,
