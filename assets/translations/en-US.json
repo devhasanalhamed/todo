@@ -18,5 +18,7 @@
     "addYourTitle" : "add your title",
     "search": "Search",
     "ar": "Arabic",
-    "en": "English"
+    "en": "English",
+    "update": "Update",
+    "editTask": "Edit Task"
 }
