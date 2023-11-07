@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo/cubit/project_cubit.dart';
@@ -22,7 +23,7 @@ class ProjectScreen extends StatelessWidget {
         var cubit = ProjectCubit.get(context);
         return Scaffold(
           appBar: AppBar(
-            title: const Text('Todo'),
+            title: Text('appTitle'.tr()),
           ),
           drawer: const DrawerComponent(),
           floatingActionButton: FloatingActionButton(
@@ -41,12 +42,12 @@ class ProjectScreen extends StatelessWidget {
             builder: (context) =>
                 const Center(child: CircularProgressIndicator()),
             fallback: (context) => cubit.tasks.isEmpty
-                ? const Center(
+                ? Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.hourglass_empty),
-                        Text('No Tasks Yet'),
+                        const Icon(Icons.hourglass_empty),
+                        Text('noTasksYet'.tr()),
                       ],
                     ),
                   )
