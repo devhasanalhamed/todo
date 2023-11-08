@@ -10,6 +10,7 @@ import 'package:todo/presentation/screens/add_task_screen.dart';
 import 'package:todo/presentation/screens/update_task_screen.dart';
 import 'package:todo/presentation/widgets/drawer_component.dart';
 import 'package:todo/presentation/widgets/search_card.dart';
+import 'package:todo/presentation/widgets/task_card.dart';
 
 class ProjectScreen extends StatelessWidget {
   const ProjectScreen({Key? key}) : super(key: key);
@@ -70,48 +71,13 @@ class ProjectScreen extends StatelessWidget {
                             onTap: () => Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => UpdateTaskScreen(
-                                    id: cubit.tasks[index]['id']),
+                                builder: (context) =>
+                                    UpdateTaskScreen(id: cubit.tasks[index].id),
                               ),
                             ),
-                            child: Card(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        cubit.tasks[index]['title'],
-                                        style: const TextStyle(
-                                          fontSize: 22.0,
-                                        ),
-                                      ),
-                                      Text(
-                                        cubit.tasks[index]['time'],
-                                        style: const TextStyle(
-                                          fontSize: 16.0,
-                                        ),
-                                      ),
-                                      IconButton(
-                                        onPressed: () =>
-                                            cubit.deleteFromDatabase(
-                                                id: cubit.tasks[index]['id']),
-                                        icon: const Icon(Icons.delete),
-                                      ),
-                                    ],
-                                  ),
-                                  Text(
-                                    cubit.tasks[index]['description'],
-                                    style: const TextStyle(
-                                      fontSize: 26.0,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                            child: TaskCard(
+                              cubit: cubit,
+                              task: cubit.tasks[index],
                             ),
                           ),
                         ),
