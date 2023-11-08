@@ -51,6 +51,7 @@ class MyApp extends StatelessWidget {
             localizationsDelegates: context.localizationDelegates,
             supportedLocales: context.supportedLocales,
             locale: context.locale,
+            debugShowCheckedModeBanner: false,
             home: AnimatedSplashScreen(
               splash: Image.asset(
                 'assets/images/app_logo.png',
