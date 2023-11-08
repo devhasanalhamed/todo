@@ -1,5 +1,5 @@
 class TaskModel {
-  final String id;
+  final int id;
   final String title;
   final String description;
   final String date;
@@ -15,7 +15,7 @@ class TaskModel {
 
   factory TaskModel.fromSQL(Map<String, dynamic> record) {
     return TaskModel(
-      id: record['id'] as String,
+      id: record['id'] as int,
       title: record['title'] as String,
       description: record['description'] as String,
       date: record['date'] as String,
