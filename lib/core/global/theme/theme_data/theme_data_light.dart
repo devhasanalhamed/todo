@@ -9,7 +9,7 @@ ThemeData get getThemeDataLight => ThemeData(
         primary: AppColorsLight.primaryColor,
       ),
       //SCAFFOLD THEME
-      scaffoldBackgroundColor: const Color.fromARGB(255, 236, 182, 32),
+      scaffoldBackgroundColor: AppColorsLight.scaffoldBackgroundColor,
       //APP BAR THEME
       appBarTheme: const AppBarTheme(
         foregroundColor: AppColorsLight.appBarForegroundColor,
@@ -17,7 +17,7 @@ ThemeData get getThemeDataLight => ThemeData(
         elevation: 0,
         centerTitle: true,
         systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarColor: Color.fromRGBO(33, 33, 33, 1),
+          statusBarColor: AppColorsLight.statusBarColor,
           statusBarBrightness: Brightness.light,
           statusBarIconBrightness: Brightness.light,
         ),
@@ -27,18 +27,18 @@ ThemeData get getThemeDataLight => ThemeData(
       ),
       //ICON THEME
       iconTheme: const IconThemeData(
-        color: Colors.deepOrange,
+        color: AppColorsLight.iconColor,
       ),
       //FLOATING ACTION BUTTON THEME
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
-        backgroundColor: Colors.deepOrange,
+        backgroundColor: AppColorsLight.iconColor,
       ),
       //TEXT THEME
       textTheme: const TextTheme(
         bodyMedium: TextStyle(
           fontSize: 18.0,
           fontWeight: FontWeight.w600,
-          color: Colors.deepPurple,
+          color: AppColorsLight.primaryTextColor,
         ),
       ),
       //CARD THEME
