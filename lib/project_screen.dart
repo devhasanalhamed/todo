@@ -47,43 +47,55 @@ class ProjectScreen extends StatelessWidget {
             },
             child: const Icon(Icons.add),
           ),
-          body: ConditionalBuilder(
-            condition: state is LoadingReadingDataFromDatabase,
-            builder: (context) =>
-                const Center(child: CircularProgressIndicator()),
-            fallback: (context) => cubit.tasks.isEmpty
-                ? Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+          body: Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Color(0xFF4969b2),
+                  Colors.black,
+                ],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ),
+            ),
+            child: ConditionalBuilder(
+              condition: state is LoadingReadingDataFromDatabase,
+              builder: (context) =>
+                  const Center(child: CircularProgressIndicator()),
+              fallback: (context) => cubit.tasks.isEmpty
+                  ? Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(Icons.hourglass_empty),
+                          Text('noTasksYet'.tr()),
+                        ],
+                      ),
+                    )
+                  : Column(
                       children: [
-                        const Icon(Icons.hourglass_empty),
-                        Text('noTasksYet'.tr()),
-                      ],
-                    ),
-                  )
-                : Column(
-                    children: [
-                      const SearchCard(),
-                      Expanded(
-                        child: ListView.builder(
-                          itemCount: cubit.tasks.length,
-                          itemBuilder: (context, index) => InkWell(
-                            onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    UpdateTaskScreen(id: cubit.tasks[index].id),
+                        const SearchCard(),
+                        Expanded(
+                          child: ListView.builder(
+                            itemCount: cubit.tasks.length,
+                            itemBuilder: (context, index) => InkWell(
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => UpdateTaskScreen(
+                                      id: cubit.tasks[index].id),
+                                ),
                               ),
-                            ),
-                            child: TaskCard(
-                              cubit: cubit,
-                              task: cubit.tasks[index],
+                              child: TaskCard(
+                                cubit: cubit,
+                                task: cubit.tasks[index],
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
+                      ],
+                    ),
+            ),
           ),
         );
       },
