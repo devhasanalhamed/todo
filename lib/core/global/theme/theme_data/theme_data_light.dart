@@ -31,7 +31,7 @@ ThemeData get getThemeDataLight => ThemeData(
       ),
       //FLOATING ACTION BUTTON THEME
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
-        backgroundColor: AppColorsLight.iconColor,
+        backgroundColor: AppColorsLight.floatingActionButtonBackgroundColor,
       ),
       //TEXT THEME
       textTheme: const TextTheme(
