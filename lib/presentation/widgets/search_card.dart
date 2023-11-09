@@ -14,7 +14,7 @@ class SearchCard extends StatelessWidget {
         horizontal: 16.0,
         vertical: 8.0,
       ),
-      color: AppColorsLight.appBarBackgroundColor,
+      color: const Color.fromARGB(0, 0, 0, 0),
       child: TextFormField(
         decoration: InputDecoration(
           isDense: true,
