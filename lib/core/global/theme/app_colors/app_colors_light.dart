@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 
 class AppColorsLight {
-  static const primaryColor = Color(0xFF333739);
+  static const primaryColor = Color(0xFF4969b2);
 
-  static const secondaryColor = Color(0xFFFEFEFE);
+  static const secondaryColor = Color(0xFFF0F0F0);
 
-  static const thirdColor = Color(0xFFFF5722);
+  static const primaryTextColor = Color(0xFFF0F0F0);
+  static const secondaryTextColor = Color(0xFFF0F0F0);
 
-  static const primaryTextColor = Color(0xFFFFFFFF);
-
-  static const secondaryTextColor = Color(0xFFFFFFFF);
-
-  static const iconColor = primaryColor;
+  static const iconColor = secondaryColor;
 
   static const statusBarColor = primaryColor;
 
@@ -21,7 +18,8 @@ class AppColorsLight {
 
   static const appBarForegroundColor = secondaryColor;
 
-  static const floatingActionButtonBackgroundColor = primaryColor;
+  static const floatingActionButtonBackgroundColor =
+      Color.fromARGB(255, 80, 80, 150);
 
-  static const cardBackgroundColor = thirdColor;
+  static const cardBackgroundColor = Color.fromARGB(50, 240, 240, 240);
 }
