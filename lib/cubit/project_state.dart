@@ -39,3 +39,15 @@ class UpdateIntoDatabase extends ProjectState {
 class DeleteFromDatabase extends ProjectState {
   DeleteFromDatabase({required super.message});
 }
+
+class ChangeLanguageToArabic extends ProjectState {
+  ChangeLanguageToArabic({required super.message});
+}
+
+class ChangeLanguageToEnglish extends ProjectState {
+  ChangeLanguageToEnglish({required super.message});
+}
+
+class ChangeThemeMode extends ProjectState {
+  ChangeThemeMode({required super.message});
+}

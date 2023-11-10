@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:todo/core/global/theme/app_colors/app_colors_light.dart';
 
@@ -13,42 +14,39 @@ class SearchCard extends StatelessWidget {
         horizontal: 16.0,
         vertical: 8.0,
       ),
-      color: AppColorsLight.appBarBackgroundColor,
-      child: Card(
-        margin: EdgeInsets.zero,
-        child: TextFormField(
-          decoration: const InputDecoration(
-            isDense: true,
-            iconColor: Color(0xFFFEFEFE),
-            prefixIconColor: Color(0xFFFEFEFE),
-            hoverColor: Color(0xFFFEFEFE),
-            fillColor: Color(0xFFFEFEFE),
-            focusColor: Color(0xFFFEFEFE),
-            suffixIconColor: Color(0xFFFEFEFE),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(15),
-              ),
-              borderSide: BorderSide(
-                color: Color(0xFFFEFEFE),
-                width: 1.0,
-              ),
+      color: const Color.fromARGB(0, 0, 0, 0),
+      child: TextFormField(
+        decoration: InputDecoration(
+          isDense: true,
+          iconColor: const Color(0xFFFEFEFE),
+          prefixIconColor: const Color(0xFFFEFEFE),
+          hoverColor: const Color(0xFFFEFEFE),
+          fillColor: const Color(0xFFFEFEFE),
+          focusColor: const Color(0xFFFEFEFE),
+          suffixIconColor: const Color(0xFFFEFEFE),
+          enabledBorder: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(15),
             ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(15),
-              ),
-              borderSide: BorderSide(
-                color: Color(0xFFFEFEFE),
-                width: 1.0,
-              ),
+            borderSide: BorderSide(
+              color: Color(0xFFFEFEFE),
+              width: 1.0,
             ),
-            prefixIcon: Icon(Icons.search),
-            hintText: 'Search',
-            hintStyle: TextStyle(color: Color(0xFFFEFEFE)),
           ),
-          cursorColor: const Color(0xFFFEFEFE),
+          focusedBorder: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(15),
+            ),
+            borderSide: BorderSide(
+              color: Color(0xFFFEFEFE),
+              width: 1.0,
+            ),
+          ),
+          prefixIcon: const Icon(Icons.search),
+          hintText: 'search'.tr(),
+          hintStyle: const TextStyle(color: Color(0xFFFEFEFE)),
         ),
+        cursorColor: const Color(0xFFFEFEFE),
       ),
     );
   }

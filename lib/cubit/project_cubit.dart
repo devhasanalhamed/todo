@@ -1,8 +1,12 @@
 import 'dart:developer';
 
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:todo/cubit/project_state.dart';
+import 'package:todo/model/task_model.dart';
 
 class ProjectCubit extends Cubit<ProjectState> {
   ProjectCubit() : super(InitialProjectState(message: ''));
@@ -66,7 +70,7 @@ class ProjectCubit extends Cubit<ProjectState> {
     });
   }
 
-  List tasks = [];
+  List<TaskModel> tasks = [];
 
   void readFromDatabase(database) async {
     emit(
@@ -78,7 +82,7 @@ class ProjectCubit extends Cubit<ProjectState> {
     """).then((value) {
       log('Data has been fetched');
       log('$value');
-      tasks = value.toList();
+      tasks = List.from(value.map((task) => TaskModel.fromSQL(task)));
       emit(SuccessReadDataFromDatabase(message: '$value'));
     });
   }
@@ -122,5 +126,31 @@ class ProjectCubit extends Cubit<ProjectState> {
     }).onError((error, stackTrace) {
       log('error occurred while deleting data $error');
     });
+  }
+
+  void changeLanguageToArabic(BuildContext context) {
+    if (context.locale == const Locale('en', 'US')) {
+      context.setLocale(const Locale('ar', 'SA'));
+      emit(ChangeLanguageToArabic(message: 'language has been changed'));
+    }
+  }
+
+  void changeLanguageToEnglish(BuildContext context) {
+    if (context.locale == const Locale('ar', 'SA')) {
+      context.setLocale(const Locale('en', 'US'));
+      emit(ChangeLanguageToEnglish(message: 'language has been changed'));
+    }
+  }
+
+  bool isDarkMode = false;
+  void changeThemeMode(bool? prefBool) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    if (prefBool != null) {
+      isDarkMode = prefBool;
+    } else {
+      isDarkMode = !isDarkMode;
+    }
+    await pref.setBool("prefBool", isDarkMode);
+    emit(ChangeThemeMode(message: 'theme mode has been changed'));
   }
 }
