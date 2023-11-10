@@ -4,6 +4,8 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo/core/global/theme/app_colors/app_colors_dark.dart';
+import 'package:todo/core/global/theme/app_colors/app_colors_light.dart';
 import 'package:todo/cubit/project_cubit.dart';
 import 'package:todo/cubit/project_state.dart';
 import 'package:todo/presentation/screens/add_task_screen.dart';
@@ -48,12 +50,17 @@ class ProjectScreen extends StatelessWidget {
             child: const Icon(Icons.add),
           ),
           body: Container(
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [
-                  Color(0xFF4969b2),
-                  Colors.black,
-                ],
+                colors: cubit.isDarkMode
+                    ? [
+                        AppColorsDark.primaryColor,
+                        AppColorsDark.secondaryColor,
+                      ]
+                    : [
+                        AppColorsLight.primaryColor,
+                        AppColorsLight.secondaryColor,
+                      ],
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
               ),
