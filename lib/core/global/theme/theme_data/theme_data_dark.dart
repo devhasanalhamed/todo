@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:todo/core/global/theme/app_colors/app_colors_light.dart';
+import 'package:todo/core/global/theme/app_colors/app_colors_dark.dart';
 
 ThemeData get getThemeDataDark => ThemeData(
       useMaterial3: true,
-      // primarySwatch: AppColorsLight.primaryColor,
+      // primarySwatch: AppColorsDark.primaryColor,
       colorScheme: const ColorScheme.light(
-        primary: AppColorsLight.primaryColor,
+        primary: AppColorsDark.primaryColor,
       ),
       //SCAFFOLD THEME
       scaffoldBackgroundColor: const Color.fromARGB(255, 32, 7, 99),
       //APP BAR THEME
       appBarTheme: const AppBarTheme(
-        foregroundColor: AppColorsLight.appBarForegroundColor,
-        backgroundColor: AppColorsLight.appBarBackgroundColor,
+        foregroundColor: AppColorsDark.appBarForegroundColor,
+        backgroundColor: AppColorsDark.appBarBackgroundColor,
         elevation: 0,
         centerTitle: true,
         systemOverlayStyle: SystemUiOverlayStyle(
@@ -43,7 +43,7 @@ ThemeData get getThemeDataDark => ThemeData(
       ),
       //CARD THEME
       cardTheme: const CardTheme(
-        color: AppColorsLight.cardBackgroundColor,
+        color: AppColorsDark.cardBackgroundColor,
         elevation: 15.0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadiusDirectional.all(
